@@ -19,8 +19,68 @@
   font-style: normal;
   font-display: swap;
 }
+:root {
+  --text-primary: #403f3d;
+  --text-inverse: #e1d4c9;
+  --text-accent: #b0907a;
+  --background-page: #e1d4c9;
+  --background-container: #665f55;
+  --background-overlay: rgba(#403f3d, 0.8);
+  --border-primary: #c1b6ad;
+  --border-inverse: #665f55;
+}
+:root .dark-theme {
+  --text-primary: #e1d4c9;
+  --text-inverse: #e1d4c9;
+  --text-accent: #b0907a;
+  --background-page: #292826;
+  --background-container: #403f3d;
+  --background-overlay: rgba(#292826, 0.8);
+  --border-primary: #665f55;
+  --border-inverse: #c1b6ad;
+}
+
+.heading-1 {
+  font-size: 4.5rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+.heading-1 .accent {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+.heading-2 {
+  font-size: 3.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.heading-2 .accent {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+.heading-3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.caption {
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.text-action {
+  font-weight: 600;
+}
+
 body {
   font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  background-color: var(--background-page);
+  color: var(--text-primary);
 }
 
 .wrapper {
