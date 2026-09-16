@@ -93,4 +93,41 @@ body {
 }
 [class*='__container'] {
   max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 0.9375rem;
+}
+// HEADER
+.header {
+  &__container {
+  }
+
+  &__logo {
+  }
+
+  &__logo-img {
+  }
+
+  &__menu {
+  }
+
+  &__actions {
+  }
+}
+.menu-header {
+  &__list {
+  }
+
+  &__item {
+  }
+
+  &__link {
+  }
+}
+.actions-header {
+  &__theme {
+    color: var(--text-primary);
+  }
+
+  &__menu {
+  }
 }

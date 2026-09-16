@@ -96,4 +96,10 @@ body {
 
 [class*=__container] {
   max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 0.9375rem;
+}
+
+.actions-header__theme {
+  color: var(--text-primary);
 }/*# sourceMappingURL=style.css.map */
