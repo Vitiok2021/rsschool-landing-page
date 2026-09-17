@@ -238,7 +238,7 @@ body {
   }
   &__body {
     background: url('../img/main-img.jpg') center / cover no-repeat;
-    padding: 100px;
+    padding: 6.25rem;
     border-radius: 2.5rem;
   }
   &__content {
@@ -277,8 +277,113 @@ body {
     position: absolute;
     top: 52%;
     transform: translateY(-50%);
-    right: 52px;
+    right: 3.25rem;
     opacity: 0;
     visibility: hidden;
+  }
+}
+// FAVORITE
+.favorite {
+  margin-bottom: 6.25rem;
+  &__container {
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  &__slider {
+  }
+}
+
+.slider {
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  column-gap: 2.5rem;
+  justify-content: space-between;
+  &__btn {
+    color: var(--text-primary);
+    width: 3.75rem;
+    height: 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.0625rem solid var(--border-inverse);
+    border-radius: 50%;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--background-container);
+        color: var(--text-inverse);
+      }
+    }
+  }
+
+  &__btn-prev {
+  }
+
+  &__window {
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+
+  &__item {
+    max-width: 21rem;
+    margin: 0 auto;
+    text-align: center;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  &__image {
+    img {
+      max-width: 100%;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+  &__title {
+  }
+
+  &__text {
+  }
+
+  &__price {
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  &__btn-next {
+    transform: rotate(180deg);
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.75rem;
+  }
+
+  &__dot {
+    width: 2.5rem;
+    height: 0.25rem;
+    background-color: var(--border-primary);
+    border-radius: 6.25rem;
+  }
+
+  &__dot-active {
+    background-color: var(--text-primary);
   }
 }
