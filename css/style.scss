@@ -394,7 +394,6 @@ body {
   }
 }
 // ABOUT
-
 .about {
   margin-bottom: 6.25rem;
   &__container {
@@ -442,5 +441,76 @@ body {
     object-fit: cover;
     &:first-child {
     }
+  }
+}
+// DOWNLOAD
+.download {
+  &__container {
+    display: flex;
+    align-items: center;
+    column-gap: 6.25rem;
+    margin-bottom: 6.25rem;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+  }
+
+  &__title {
+  }
+
+  &__text {
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    column-gap: 1.25rem;
+  }
+
+  &__image {
+    flex: 0 0 46%;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+.actions-download {
+  &__app-store,
+  &__google-play {
+    display: flex;
+    align-items: center;
+    column-gap: 0.8125rem;
+    padding: 0.875rem 2.75rem 0.875rem 1.25rem;
+    border: 1px solid var(--border-inverse);
+    border-radius: 6.25rem;
+    transition:
+      background-color 0.3s ease 0s,
+      color 0.3s ease 0s;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--background-container);
+        color: var(--text-inverse);
+      }
+    }
+  }
+
+  &__app-content {
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    font-size: 0.625rem;
+    line-height: 1.4;
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  &__google-play {
   }
 }

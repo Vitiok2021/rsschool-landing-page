@@ -366,4 +366,51 @@ body {
   width: 100%;
   border-radius: 1.25rem;
   object-fit: cover;
+}
+.download__container {
+  display: flex;
+  align-items: center;
+  column-gap: 6.25rem;
+  margin-bottom: 6.25rem;
+}
+.download__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+}
+.download__actions {
+  display: flex;
+  align-items: center;
+  column-gap: 1.25rem;
+}
+.download__image {
+  flex: 0 0 46%;
+}
+.download__image img {
+  max-width: 100%;
+}
+
+.actions-download__app-store, .actions-download__google-play {
+  display: flex;
+  align-items: center;
+  column-gap: 0.8125rem;
+  padding: 0.875rem 2.75rem 0.875rem 1.25rem;
+  border: 1px solid var(--border-inverse);
+  border-radius: 6.25rem;
+  transition: background-color 0.3s ease 0s, color 0.3s ease 0s;
+}
+@media (any-hover: hover) {
+  .actions-download__app-store:hover, .actions-download__google-play:hover {
+    background-color: var(--background-container);
+    color: var(--text-inverse);
+  }
+}
+.actions-download__subtitle {
+  font-weight: 600;
+  font-size: 0.625rem;
+  line-height: 1.4;
+}
+.actions-download__title {
+  font-size: 1.125rem;
+  font-weight: 600;
 }/*# sourceMappingURL=style.css.map */
