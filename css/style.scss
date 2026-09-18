@@ -305,6 +305,7 @@ body {
   justify-content: space-between;
   &__btn {
     color: var(--text-primary);
+    flex-shrink: 0;
     width: 3.75rem;
     height: 3.75rem;
     display: flex;
@@ -328,6 +329,8 @@ body {
 
   &__window {
     overflow: hidden;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   &__track {
@@ -336,7 +339,8 @@ body {
   }
 
   &__item {
-    max-width: 21rem;
+    flex: 0 0 100%;
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
     flex-shrink: 0;
@@ -349,6 +353,8 @@ body {
     }
   }
   &__content {
+    max-width: 21rem;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
@@ -385,5 +391,56 @@ body {
 
   &__dot-active {
     background-color: var(--text-primary);
+  }
+}
+// ABOUT
+
+.about {
+  margin-bottom: 6.25rem;
+  &__container {
+  }
+
+  &__title {
+    margin-bottom: 2.5rem;
+  }
+
+  &__images {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  &__images-left,
+  &__images-right {
+    display: flex;
+    gap: 2.5rem;
+    flex-direction: column;
+    flex: 1;
+  }
+  &__images-left {
+    .about__image {
+      &:first-child {
+        aspect-ratio: 660/590;
+      }
+      &:last-child {
+        aspect-ratio: 660/430;
+      }
+    }
+  }
+  &__images-right {
+    .about__image {
+      &:first-child {
+        aspect-ratio: 660/430;
+      }
+      &:last-child {
+        aspect-ratio: 660/590;
+      }
+    }
+  }
+  &__image {
+    width: 100%;
+    border-radius: 1.25rem;
+    object-fit: cover;
+    &:first-child {
+    }
   }
 }
