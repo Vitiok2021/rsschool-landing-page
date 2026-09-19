@@ -53,6 +53,13 @@
     font-style: italic;
     color: var(--text-accent);
   }
+  @media (width <= 992px) {
+    font-size: 3.25rem;
+  }
+  @media (width <= 670px) {
+    font-size: 2.625rem;
+    line-height: 1.15;
+  }
 }
 .heading-2 {
   font-size: 3.75rem;
@@ -61,6 +68,12 @@
   .accent {
     font-style: italic;
     color: var(--text-accent);
+  }
+  @media (width <= 992px) {
+    font-size: 2.75rem;
+  }
+  @media (width <= 670px) {
+    font-size: 2rem;
   }
 }
 .heading-3 {
@@ -96,6 +109,9 @@ body {
   max-width: 90rem;
   margin: 0 auto;
   padding: 0 2.5rem;
+  @media (width <= 380px) {
+    padding: 0 1rem;
+  }
 }
 // HEADER
 .header {
@@ -241,6 +257,12 @@ body {
     background: url('../img/main-img.jpg') center / cover no-repeat;
     padding: 6.25rem;
     border-radius: 2.5rem;
+    @media (width <= 768px) {
+      padding-left: 3.75rem;
+    }
+    @media (width <= 670px) {
+      padding: 60px 16px;
+    }
   }
   &__content {
     max-width: 33.125rem;
@@ -281,6 +303,10 @@ body {
     right: 3.25rem;
     opacity: 0;
     visibility: hidden;
+    @media (width <= 768px) {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 // FAVORITE
@@ -317,6 +343,9 @@ body {
     transition:
       background-color 0.3s ease,
       border-color 0.3s ease;
+    @media (width <= 550px) {
+      display: none;
+    }
     @media (any-hover: hover) {
       &:hover {
         background-color: var(--background-container);
@@ -407,6 +436,9 @@ body {
   &__images {
     display: flex;
     gap: 2.5rem;
+    @media (width <= 768px) {
+      flex-direction: column;
+    }
   }
 
   &__images-left,
@@ -421,8 +453,17 @@ body {
       &:first-child {
         aspect-ratio: 660/590;
       }
+
+      @media (width <= 380px) {
+        &:first-child {
+          aspect-ratio: 348/590;
+        }
+      }
       &:last-child {
         aspect-ratio: 660/430;
+        @media (width <= 768px) {
+          display: none;
+        }
       }
     }
   }
@@ -430,9 +471,17 @@ body {
     .about__image {
       &:first-child {
         aspect-ratio: 660/430;
+        @media (width <= 768px) {
+          display: none;
+        }
       }
       &:last-child {
         aspect-ratio: 660/590;
+      }
+      @media (width <= 380px) {
+        &:last-child {
+          aspect-ratio: 348/590;
+        }
       }
     }
   }
@@ -451,11 +500,19 @@ body {
     align-items: center;
     column-gap: 6.25rem;
     margin-bottom: 6.25rem;
+    @media (width <= 768px) {
+      flex-direction: column;
+      row-gap: 6.25rem;
+    }
+    @media (width <= 670px) {
+      row-gap: 2.5rem;
+    }
   }
   &__content {
     display: flex;
     flex-direction: column;
     row-gap: 2.5rem;
+    flex: 1;
   }
 
   &__title {
@@ -468,12 +525,21 @@ body {
     display: flex;
     align-items: center;
     column-gap: 1.25rem;
+    flex-wrap: wrap;
+    row-gap: 1.25rem;
   }
 
   &__image {
     flex: 0 0 46%;
+    @media (width <= 768px) {
+      flex: 1 1 auto;
+      width: 100%;
+      text-align: center;
+    }
     img {
       max-width: 100%;
+      height: auto;
+      object-fit: contain;
     }
   }
 }
@@ -481,10 +547,11 @@ body {
 .actions-download {
   &__app-store,
   &__google-play {
+    width: 12.5rem;
     display: flex;
     align-items: center;
     column-gap: 0.8125rem;
-    padding: 0.875rem 2.75rem 0.875rem 1.25rem;
+    padding: 0.875rem 0.875rem 1.25rem;
     border: 1px solid var(--border-inverse);
     border-radius: 6.25rem;
     transition:
@@ -519,6 +586,9 @@ body {
 .footer {
   padding: 0 2.5rem;
   margin-bottom: 2.5rem;
+  @media (width <= 670px) {
+    padding: 0 1rem;
+  }
   &__container {
     border-radius: 2.5rem;
     background-color: var(--background-container);
@@ -526,10 +596,26 @@ body {
     align-items: center;
     column-gap: 6.25rem;
     padding: 6.25rem;
+    @media (width <= 992px) {
+      column-gap: 3.75rem;
+    }
+    @media (width <= 768px) {
+      flex-direction: column;
+      align-items: start;
+      row-gap: 6.25rem;
+      padding: 6.25rem 3.75rem;
+    }
+    @media (width <= 670px) {
+      padding: 3.75rem 1rem;
+      row-gap: 2.5rem;
+    }
   }
 
   &__content {
     flex: 0 1 33.125rem;
+    @media (width <= 768px) {
+      flex: 1 1 auto;
+    }
   }
 
   &__title {
@@ -548,6 +634,8 @@ body {
   display: flex;
   align-items: center;
   column-gap: 18px;
+  @media (width <= 768px) {
+  }
   &__link {
     color: var(--text-inverse);
     border: 0.0625rem solid var(--border-primary);

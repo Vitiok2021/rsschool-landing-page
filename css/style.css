@@ -50,6 +50,17 @@
   font-style: italic;
   color: var(--text-accent);
 }
+@media (width <= 992px) {
+  .heading-1 {
+    font-size: 3.25rem;
+  }
+}
+@media (width <= 670px) {
+  .heading-1 {
+    font-size: 2.625rem;
+    line-height: 1.15;
+  }
+}
 
 .heading-2 {
   font-size: 3.75rem;
@@ -59,6 +70,16 @@
 .heading-2 .accent {
   font-style: italic;
   color: var(--text-accent);
+}
+@media (width <= 992px) {
+  .heading-2 {
+    font-size: 2.75rem;
+  }
+}
+@media (width <= 670px) {
+  .heading-2 {
+    font-size: 2rem;
+  }
 }
 
 .heading-3 {
@@ -99,6 +120,11 @@ body {
   max-width: 90rem;
   margin: 0 auto;
   padding: 0 2.5rem;
+}
+@media (width <= 380px) {
+  [class*=__container] {
+    padding: 0 1rem;
+  }
 }
 
 .header__container {
@@ -220,6 +246,16 @@ body {
   padding: 6.25rem;
   border-radius: 2.5rem;
 }
+@media (width <= 768px) {
+  .hero__body {
+    padding-left: 3.75rem;
+  }
+}
+@media (width <= 670px) {
+  .hero__body {
+    padding: 60px 16px;
+  }
+}
 .hero__content {
   max-width: 33.125rem;
   display: flex;
@@ -253,6 +289,12 @@ body {
   opacity: 0;
   visibility: hidden;
 }
+@media (width <= 768px) {
+  .hero__link-icon {
+    opacity: 1;
+    visibility: visible;
+  }
+}
 
 .favorite {
   margin-bottom: 6.25rem;
@@ -279,6 +321,11 @@ body {
   border: 0.0625rem solid var(--border-inverse);
   border-radius: 50%;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+@media (width <= 550px) {
+  .slider__btn {
+    display: none;
+  }
 }
 @media (any-hover: hover) {
   .slider__btn:hover {
@@ -347,6 +394,11 @@ body {
   display: flex;
   gap: 2.5rem;
 }
+@media (width <= 768px) {
+  .about__images {
+    flex-direction: column;
+  }
+}
 .about__images-left, .about__images-right {
   display: flex;
   gap: 2.5rem;
@@ -356,14 +408,34 @@ body {
 .about__images-left .about__image:first-child {
   aspect-ratio: 660/590;
 }
+@media (width <= 380px) {
+  .about__images-left .about__image:first-child {
+    aspect-ratio: 348/590;
+  }
+}
 .about__images-left .about__image:last-child {
   aspect-ratio: 660/430;
+}
+@media (width <= 768px) {
+  .about__images-left .about__image:last-child {
+    display: none;
+  }
 }
 .about__images-right .about__image:first-child {
   aspect-ratio: 660/430;
 }
+@media (width <= 768px) {
+  .about__images-right .about__image:first-child {
+    display: none;
+  }
+}
 .about__images-right .about__image:last-child {
   aspect-ratio: 660/590;
+}
+@media (width <= 380px) {
+  .about__images-right .about__image:last-child {
+    aspect-ratio: 348/590;
+  }
 }
 .about__image {
   width: 100%;
@@ -376,28 +448,52 @@ body {
   column-gap: 6.25rem;
   margin-bottom: 6.25rem;
 }
+@media (width <= 768px) {
+  .download__container {
+    flex-direction: column;
+    row-gap: 6.25rem;
+  }
+}
+@media (width <= 670px) {
+  .download__container {
+    row-gap: 2.5rem;
+  }
+}
 .download__content {
   display: flex;
   flex-direction: column;
   row-gap: 2.5rem;
+  flex: 1;
 }
 .download__actions {
   display: flex;
   align-items: center;
   column-gap: 1.25rem;
+  flex-wrap: wrap;
+  row-gap: 1.25rem;
 }
 .download__image {
   flex: 0 0 46%;
 }
+@media (width <= 768px) {
+  .download__image {
+    flex: 1 1 auto;
+    width: 100%;
+    text-align: center;
+  }
+}
 .download__image img {
   max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .actions-download__app-store, .actions-download__google-play {
+  width: 12.5rem;
   display: flex;
   align-items: center;
   column-gap: 0.8125rem;
-  padding: 0.875rem 2.75rem 0.875rem 1.25rem;
+  padding: 0.875rem 0.875rem 1.25rem;
   border: 1px solid var(--border-inverse);
   border-radius: 6.25rem;
   transition: background-color 0.3s ease 0s, color 0.3s ease 0s;
@@ -421,6 +517,11 @@ body {
   padding: 0 2.5rem;
   margin-bottom: 2.5rem;
 }
+@media (width <= 670px) {
+  .footer {
+    padding: 0 1rem;
+  }
+}
 .footer__container {
   border-radius: 2.5rem;
   background-color: var(--background-container);
@@ -429,8 +530,32 @@ body {
   column-gap: 6.25rem;
   padding: 6.25rem;
 }
+@media (width <= 992px) {
+  .footer__container {
+    column-gap: 3.75rem;
+  }
+}
+@media (width <= 768px) {
+  .footer__container {
+    flex-direction: column;
+    align-items: start;
+    row-gap: 6.25rem;
+    padding: 6.25rem 3.75rem;
+  }
+}
+@media (width <= 670px) {
+  .footer__container {
+    padding: 3.75rem 1rem;
+    row-gap: 2.5rem;
+  }
+}
 .footer__content {
   flex: 0 1 33.125rem;
+}
+@media (width <= 768px) {
+  .footer__content {
+    flex: 1 1 auto;
+  }
 }
 .footer__title {
   color: var(--text-inverse);
