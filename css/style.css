@@ -112,6 +112,10 @@
   font-weight: 600;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter", sans-serif;
   line-height: 1.5;
@@ -538,6 +542,13 @@ body {
   .about__images {
     flex-direction: column;
   }
+}
+.about__images img {
+  cursor: pointer;
+  transition: transform 0.3s ease 0s;
+}
+.about__images img:hover {
+  transform: scale(1.03);
 }
 .about__images-left, .about__images-right {
   display: flex;

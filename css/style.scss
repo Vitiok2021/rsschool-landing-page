@@ -103,7 +103,9 @@
 .text-action {
   font-weight: 600;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
@@ -572,6 +574,13 @@ body {
     gap: 2.5rem;
     @media (width <= 768px) {
       flex-direction: column;
+    }
+    img {
+      cursor: pointer;
+      transition: transform 0.3s ease 0s;
+      &:hover {
+        transform: scale(1.03);
+      }
     }
   }
 
