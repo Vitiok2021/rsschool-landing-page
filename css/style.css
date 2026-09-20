@@ -49,6 +49,10 @@
 .dark-theme .actions-header__theme::before {
   left: 2.9rem;
 }
+.dark-theme .actions-header__theme::after {
+  left: 0.25rem;
+  right: auto;
+}
 
 .heading-1 {
   font-size: 4.5rem;
@@ -264,6 +268,22 @@ body {
   left: 0.25rem;
   transform: translateY(-50%);
   transition: all 0.3s ease;
+}
+.actions-header__theme::after {
+  content: "";
+  position: absolute;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--border-primary);
+  top: 50%;
+  right: 0.25rem;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.actions-header__theme:hover::after {
+  opacity: 1;
 }
 .actions-header__icon {
   display: flex;

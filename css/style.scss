@@ -52,6 +52,10 @@
     &::before {
       left: 2.9rem;
     }
+    &::after {
+      left: 0.25rem;
+      right: auto;
+    }
   }
 }
 .heading-1 {
@@ -236,6 +240,7 @@ body {
   gap: 1.5rem;
   position: relative;
   z-index: 101;
+
   &__theme {
     border: 0.0625rem solid var(--border-primary);
     border-radius: 6.25rem;
@@ -261,6 +266,24 @@ body {
       left: 0.25rem;
       transform: translateY(-50%);
       transition: all 0.3s ease;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background-color: var(--border-primary);
+      top: 50%;
+      right: 0.25rem;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
     }
   }
 
