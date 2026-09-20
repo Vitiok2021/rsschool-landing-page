@@ -30,18 +30,28 @@
 
   --border-primary: #c1b6ad;
   --border-inverse: #665f55;
+}
+.dark-theme {
+  --text-primary: #e1d4c9;
+  --text-inverse: #e1d4c9;
+  --text-accent: #b0907a;
 
-  .dark-theme {
-    --text-primary: #e1d4c9;
-    --text-inverse: #e1d4c9;
-    --text-accent: #b0907a;
+  --background-page: #292826;
+  --background-container: #403f3d;
+  --background-overlay: rgba(#292826, 0.8);
 
-    --background-page: #292826;
-    --background-container: #403f3d;
-    --background-overlay: rgba(#292826, 0.8);
-
-    --border-primary: #665f55;
-    --border-inverse: #c1b6ad;
+  --border-primary: #665f55;
+  --border-inverse: #c1b6ad;
+  .header__logo-img {
+    display: none;
+  }
+  .header__logo-img-dark {
+    display: block;
+  }
+  .actions-header__theme {
+    &::before {
+      left: 2.9rem;
+    }
   }
 }
 .heading-1 {
@@ -130,10 +140,13 @@ body {
     z-index: 101;
   }
 
-  &__logo-img {
+  &__logo-img,
+  &__logo-img-dark {
     max-width: 100%;
   }
-
+  &__logo-img-dark {
+    display: none;
+  }
   &__menu {
     flex: 1 1 auto;
     @media (max-width: 768px) {
@@ -152,7 +165,7 @@ body {
     width: 100%;
     height: 100%;
     top: 0;
-    left: 0;
+    left: -100%;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -174,11 +187,11 @@ body {
 
     @media (width <= 768px) {
       flex: 1 1 auto;
-      align-items: flex-end;
+      align-items: center;
       flex-direction: column;
-      row-gap: 0.125rem;
-      row-gap: 1.25rem;
-      font-size: 1.75rem;
+      line-height: 1.25;
+      row-gap: 3.75rem;
+      font-size: 2rem;
     }
     @media (width < 866px) {
       column-gap: 1.75rem;
@@ -186,6 +199,13 @@ body {
   }
 
   &__item {
+    .actions-header__menu {
+      display: none;
+      @media (width <=768px) {
+        display: block;
+        margin-top: 2.5rem;
+      }
+    }
   }
 
   &__link {
@@ -240,7 +260,7 @@ body {
       top: 50%;
       left: 0.25rem;
       transform: translateY(-50%);
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
   }
 
@@ -265,7 +285,9 @@ body {
     font-weight: 600;
     position: relative;
     color: var(--text-primary);
-
+    @media (width <= 768px) {
+      display: none;
+    }
     &::before {
       content: '';
       position: absolute;
@@ -322,11 +344,6 @@ body {
   }
 
   .menu-open & {
-    span {
-    }
-    &::before,
-    &::after {
-    }
     &::before {
       top: 50%;
       transform: translate(-50%, -50%) rotate(-45deg);
