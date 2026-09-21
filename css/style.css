@@ -1,3 +1,66 @@
+.catalog__title {
+  font-size: 3.75rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+.catalog__title:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+.catalog__title .accent {
+  font-style: italic;
+  color: var(--text-accent);
+}
+.catalog__tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+}
+.catalog__tabs:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+.tab-catalog__btn {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  border-radius: 6.25rem;
+  border: 0.0625rem solid var(--border-primary);
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  transition: all 0.3s ease 0s;
+}
+@media (any-hover: hover) {
+  .tab-catalog__btn:hover {
+    background-color: var(--background-container);
+    color: var(--text-inverse);
+  }
+  .tab-catalog__btn:hover .tab-catalog__icon {
+    background-color: var(--background-page);
+  }
+}
+.tab-catalog__btn--active {
+  background-color: var(--background-container);
+  color: var(--text-inverse);
+}
+.tab-catalog__btn--active .tab-catalog__icon {
+  background-color: var(--background-page);
+}
+.tab-catalog__icon {
+  width: 30px;
+  height: 30px;
+  background-color: var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.tab-catalog__name {
+  font-weight: 600;
+}
+
 @font-face {
   font-family: "Inter";
   src: url("../fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
@@ -58,7 +121,6 @@
   font-size: 4.5rem;
   font-weight: 600;
   line-height: 1.05;
-  color: var(--text-inverse);
 }
 .heading-1 .accent {
   font-style: italic;
@@ -329,6 +391,9 @@ body {
     width: 100%;
   }
 }
+.actions-header__menu.active::before {
+  width: 100%;
+}
 
 .icon-menu {
   display: none;
@@ -405,6 +470,9 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 2.5rem;
+}
+.hero__title {
+  color: var(--text-inverse);
 }
 .hero__text {
   color: var(--text-inverse);
