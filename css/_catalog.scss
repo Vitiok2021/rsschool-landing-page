@@ -58,7 +58,7 @@
     }
   }
   &__grid-title {
-    overflow: hidden;
+    visibility: hidden;
   }
   &__item {
     @media (width <=768px) {

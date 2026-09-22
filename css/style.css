@@ -63,7 +63,7 @@
   }
 }
 .catalog__grid-title {
-  overflow: hidden;
+  visibility: hidden;
 }
 @media (width <= 768px) {
   .catalog__item:nth-child(n+5) {
