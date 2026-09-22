@@ -57,7 +57,9 @@
       grid-template-columns: auto;
     }
   }
-
+  &__grid-title {
+    overflow: hidden;
+  }
   &__item {
     @media (width <=768px) {
       &:nth-child(n + 5) {

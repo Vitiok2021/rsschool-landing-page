@@ -62,6 +62,9 @@
     grid-template-columns: auto;
   }
 }
+.catalog__grid-title {
+  overflow: hidden;
+}
 @media (width <= 768px) {
   .catalog__item:nth-child(n+5) {
     display: none;
