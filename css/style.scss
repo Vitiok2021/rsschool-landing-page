@@ -131,6 +131,8 @@ body {
 }
 // HEADER
 .header {
+  position: relative;
+
   &__container {
     display: flex;
     align-items: center;
@@ -178,9 +180,23 @@ body {
     row-gap: 2.5rem;
     background-color: var(--background-page);
     transition: left 0.5s ease;
-  }
-  .menu-open {
-    left: 0;
+    &::before {
+      content: '';
+      position: fixed;
+      width: 100%;
+      height: 6.25rem;
+      top: 0;
+      left: -100%;
+      background-color: var(--background-page);
+      z-index: 2;
+      transition: left 0.5s ease 0s;
+    }
+    .menu-open & {
+      left: 0;
+      &::before {
+        left: 0;
+      }
+    }
   }
   &__list {
     display: flex;
@@ -189,7 +205,7 @@ body {
     align-items: center;
     column-gap: 2.5rem;
     row-gap: 0.3125rem;
-    z-index: 101;
+    z-index: 1;
 
     @media (width <= 768px) {
       flex: 1 1 auto;
@@ -205,6 +221,7 @@ body {
   }
 
   &__item {
+    text-align: center;
     .actions-header__menu {
       display: none;
       @media (width <=768px) {
@@ -357,20 +374,22 @@ body {
   &::after {
     content: '';
     transition: all 0.3s ease 0s;
-    right: 0;
+    // right: 0;
     position: absolute;
     width: 1rem;
-    height: 0.125rem;
+    height: 1.5px;
     background-color: var(--text-primary);
     left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
   }
   &::before {
     top: calc(50% - 4px);
-    transform: translateX(-50%);
+    // transform: translateX(-50%);
   }
   &::after {
     top: calc(50% + 4px);
-    transform: translateX(-50%);
+    // transform: translateX(-50%);
   }
 
   .menu-open & {

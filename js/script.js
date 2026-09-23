@@ -14,3 +14,12 @@ function toggleTheme() {
     localStorage.setItem('theme', 'light')
   }
 }
+
+const burgerBtn = document.querySelector('.icon-menu')
+const body = document.querySelector('body')
+const burgerBody = document.querySelector('.menu-header')
+
+burgerBtn.addEventListener('click', () => {
+  body.classList.toggle('menu-open')
+  body.classList.toggle('body-lock')
+})
