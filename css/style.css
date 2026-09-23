@@ -749,7 +749,7 @@ body {
   background-color: var(--border-primary);
   border-radius: 6.25rem;
 }
-.slider__dot-active {
+.slider__dot--active {
   background-color: var(--text-primary);
 }
 
