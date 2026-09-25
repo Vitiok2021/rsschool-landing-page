@@ -74,11 +74,6 @@
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
-@media (width <= 768px) {
-  .catalog__item:nth-child(n+5) {
-    display: none;
-  }
-}
 .catalog__item.hidden {
   display: none;
 }

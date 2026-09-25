@@ -68,30 +68,101 @@ if (nextBtn) {
     updateSlider()
   })
 }
-let startX = 0
-let endX = 0
-sliderTrack.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX
-  console.log(startX)
-})
-sliderTrack.addEventListener('touchmove', (e) => {
-  endX = e.touches[0].clientX
-  console.log(endX)
-})
-sliderTrack.addEventListener('touchend', (e) => {
-  const diff = startX - endX
-  if (diff > 50) {
-    currentIndex++
-    if (currentIndex === sliderItem.length) {
-      currentIndex = 0
+if (sliderTrack) {
+  let startX = 0
+  let endX = 0
+  sliderTrack.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX
+    console.log(startX)
+  })
+  sliderTrack.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX
+    console.log(endX)
+  })
+  sliderTrack.addEventListener('touchend', (e) => {
+    const diff = startX - endX
+    if (diff > 50) {
+      currentIndex++
+      if (currentIndex === sliderItem.length) {
+        currentIndex = 0
+      }
+      updateSlider()
     }
-    updateSlider()
-  }
-  if (diff < -50) {
-    currentIndex--
-    if (currentIndex < 0) {
-      currentIndex = sliderItem.length - 1
+    if (diff < -50) {
+      currentIndex--
+      if (currentIndex < 0) {
+        currentIndex = sliderItem.length - 1
+      }
+      updateSlider()
     }
-    updateSlider()
+  })
+}
+
+// CATALOG
+let products = []
+async function getProducts() {
+  const response = await fetch('data/products.json')
+  products = await response.json()
+  // console.log(products)
+  let currentProducts = products.filter((product) => product.category === 'coffee')
+  if (window.innerWidth <= 768) {
+    currentProducts = currentProducts.slice(0, limitTabs)
   }
+  renderCards(currentProducts)
+}
+getProducts()
+const catalogGrid = document.querySelector('.catalog__grid')
+const tabs = document.querySelectorAll('.tab-catalog__btn')
+const limitTabs = 4
+const loadMoreBtn = document.querySelector('.catalog__load-more-btn')
+
+tabs.forEach((tab) => {
+  tab.addEventListener('click', (e) => {
+    const category = e.currentTarget.dataset.category
+    const categoryProducts = products.filter((product) => product.category === category)
+    let productsToRender = categoryProducts
+    if (window.innerWidth <= 768) {
+      productsToRender = categoryProducts.slice(0, limitTabs)
+    }
+    renderCards(productsToRender)
+
+    if (categoryProducts.length > productsToRender.length) {
+      loadMoreBtn.style.display = 'block'
+    } else {
+      loadMoreBtn.style.display = 'none'
+    }
+
+    tabs.forEach((tab) => {
+      tab.classList.remove('tab-catalog__btn--active')
+    })
+    e.currentTarget.classList.add('tab-catalog__btn--active')
+  })
+})
+
+function renderCards(products) {
+  catalogGrid.innerHTML = ''
+  products.forEach((product) => {
+    const cardHTML = `<article class="catalog__item item-catalog" data-category="${product.category}">
+                        <div class="item-catalog__image">
+                          <img src="${product.image}" />
+                        </div>
+                        <div class="item-catalog__body">
+                          <a href="#" class="item-catalog__title-link">
+                            <h3 class="item-catalog__title">${product.name}</h3>
+                          </a>
+                          <div class="item-catalog__text">${product.description}</div>
+                          <div class="item-catalog__price">$${product.price}</div>
+                        </div>
+                      </article>`
+    catalogGrid.insertAdjacentHTML('beforeend', cardHTML)
+  })
+}
+
+// LOAD MORE
+loadMoreBtn.addEventListener('click', (e) => {
+  const activeTab = document.querySelector('.tab-catalog__btn--active')
+  const category = activeTab.dataset.category
+  const categoryProducts = products.filter((product) => product.category === category)
+  renderCards(categoryProducts)
+  loadMoreBtn.style.display = 'none'
 })

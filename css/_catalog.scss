@@ -71,9 +71,6 @@
   }
   &__item {
     @media (width <=768px) {
-      &:nth-child(n + 5) {
-        display: none;
-      }
     }
     &.hidden {
       display: none;
