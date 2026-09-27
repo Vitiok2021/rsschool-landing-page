@@ -14,6 +14,7 @@ function toggleTheme() {
     localStorage.setItem('theme', 'light')
   }
 }
+
 // Burger
 const burgerBtn = document.querySelector('.icon-menu')
 const body = document.querySelector('body')
@@ -36,6 +37,7 @@ document.addEventListener('keydown', (e) => {
     body.classList.remove('body-lock')
   }
 })
+
 // Slider
 const prevBtn = document.querySelector('.slider__btn-prev')
 const nextBtn = document.querySelector('.slider__btn-next')
@@ -110,7 +112,9 @@ async function getProducts() {
   }
   renderCards(currentProducts)
 }
+
 getProducts()
+
 const catalogGrid = document.querySelector('.catalog__grid')
 const tabs = document.querySelectorAll('.tab-catalog__btn')
 const limitTabs = 4
@@ -157,6 +161,15 @@ function renderCards(products) {
 }
 
 // LOAD MORE
+const modal = document.querySelector('.modal')
+const modalImage = document.querySelector('.modal__image img')
+const modalTitle = document.querySelector('.modal__title')
+const modalDescription = document.querySelector('.modal__description')
+const modalPrice = document.querySelector('.modal__price')
+const sizeLabels = document.querySelectorAll('.actions-modal__size-text')
+const additiveLabels = document.querySelectorAll('.actions-modal__additive-text')
+const modalClose = document.querySelector('.modal__btn')
+
 loadMoreBtn.addEventListener('click', (e) => {
   const activeTab = document.querySelector('.tab-catalog__btn--active')
   const category = activeTab.dataset.category
@@ -171,5 +184,35 @@ catalogGrid.addEventListener('click', (e) => {
 
   const productName = clickedCard.dataset.name
   const selectedProduct = products.find((product) => product.name === productName)
+
+  modalImage.src = selectedProduct.image
+  modalTitle.textContent = selectedProduct.name
+  modalDescription.textContent = selectedProduct.description
+  modalPrice.innerHTML = 'Total: <span>$' + selectedProduct.price + '</span>'
+  sizeLabels[0].textContent = selectedProduct.sizes.s.size
+  sizeLabels[1].textContent = selectedProduct.sizes.m.size
+  sizeLabels[2].textContent = selectedProduct.sizes.l.size
+
+  additiveLabels[0].textContent = selectedProduct.additives[0].name
+  additiveLabels[1].textContent = selectedProduct.additives[1].name
+  additiveLabels[2].textContent = selectedProduct.additives[2].name
+
+  modal.classList.add('is-open')
+  body.classList.add('body-lock')
   console.log(selectedProduct)
+})
+
+function closeModal() {
+  modal.classList.remove('is-open')
+  body.classList.remove('body-lock')
+}
+
+modalClose.addEventListener('click', closeModal)
+modal.addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal()
+  // console.log(e.target)
+  // console.log(e.currentTarget)
+})
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Escape' && modal.classList.contains('is-open')) closeModal()
 })

@@ -207,24 +207,43 @@
 }
 // MODAL
 .modal {
-  max-width: 50rem;
-  margin: 0 auto;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  border-radius: 2.5rem;
-  padding: 1rem;
-  background-color: var(--background-page);
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(64, 63, 61, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
   &__content {
+    background-color: var(--background-page);
+    max-width: 50rem;
+    margin: 0 auto;
+    border-radius: 2.5rem;
+    padding: 1rem;
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
     row-gap: 20px;
   }
 
   &__image {
-    flex: 1 1 19.375rem;
+    flex: 1 0 19.375rem;
+    border-radius: 2.5rem;
+    overflow: hidden;
     img {
       max-width: 100%;
+    }
+    @media (width <= 600px) {
+      display: none;
     }
   }
 
@@ -307,27 +326,30 @@
     border-radius: 6.25rem;
     transition: all 0.3s ease 0s;
     font-weight: 600;
-    span {
-      text-transform: uppercase;
-      width: 1.875rem;
-      height: 1.875rem;
-      background-color: var(--border-primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s ease 0s;
-      color: var(--text-primary);
-    }
+
     @media (any-hover: hover) {
       &:hover {
         background-color: var(--background-container);
         color: var(--text-inverse);
 
-        span {
+        .actions-modal__size,
+        .actions-modal__additive {
           background-color: var(--background-page);
         }
       }
     }
+  }
+  &__size,
+  &__additive {
+    text-transform: uppercase;
+    width: 1.875rem;
+    height: 1.875rem;
+    background-color: var(--border-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease 0s;
+    color: var(--text-primary);
   }
 }
