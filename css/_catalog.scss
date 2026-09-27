@@ -181,6 +181,7 @@
     flex-direction: column;
     row-gap: 0.75rem;
     flex-grow: 1;
+    cursor: pointer;
   }
 
   &__title {
@@ -202,5 +203,131 @@
     font-size: 1.5rem;
     line-height: 1.25;
     font-weight: 600;
+  }
+}
+// MODAL
+.modal {
+  max-width: 50rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  border-radius: 2.5rem;
+  padding: 1rem;
+  background-color: var(--background-page);
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  &__image {
+    flex: 1 1 19.375rem;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__title {
+    margin-bottom: 0.75rem;
+  }
+
+  &__description {
+  }
+
+  &__actions {
+  }
+  &__price {
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  &__info {
+    font-size: 10px;
+    line-height: 1.4;
+    padding-left: 1.5rem;
+    position: relative;
+    font-weight: 600;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-image: url('../img/catalog/info-empty.svg');
+      top: 0;
+      left: 0;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    font-weight: 600;
+    border-radius: 6.25rem;
+    border: 1px solid var(--border-inverse);
+    padding: 0.625rem;
+    transition: all 0.3s ease 0s;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--background-container);
+        color: var(--text-inverse);
+      }
+    }
+  }
+}
+.actions-modal {
+  &__label {
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 16px 8px 8px;
+    background-color: transparent;
+    border: 1px solid var(--border-primary);
+    border-radius: 6.25rem;
+    transition: all 0.3s ease 0s;
+    font-weight: 600;
+    span {
+      text-transform: uppercase;
+      width: 1.875rem;
+      height: 1.875rem;
+      background-color: var(--border-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease 0s;
+      color: var(--text-primary);
+    }
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--background-container);
+        color: var(--text-inverse);
+
+        span {
+          background-color: var(--background-page);
+        }
+      }
+    }
   }
 }

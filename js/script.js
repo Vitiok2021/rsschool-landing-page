@@ -142,14 +142,12 @@ tabs.forEach((tab) => {
 function renderCards(products) {
   catalogGrid.innerHTML = ''
   products.forEach((product) => {
-    const cardHTML = `<article class="catalog__item item-catalog" data-category="${product.category}">
+    const cardHTML = `<article class="catalog__item item-catalog" data-category="${product.category}" data-name="${product.name}">
                         <div class="item-catalog__image">
                           <img src="${product.image}" />
                         </div>
                         <div class="item-catalog__body">
-                          <a href="#" class="item-catalog__title-link">
-                            <h3 class="item-catalog__title">${product.name}</h3>
-                          </a>
+                          <h3 class="item-catalog__title">${product.name}</h3>
                           <div class="item-catalog__text">${product.description}</div>
                           <div class="item-catalog__price">$${product.price}</div>
                         </div>
@@ -165,4 +163,13 @@ loadMoreBtn.addEventListener('click', (e) => {
   const categoryProducts = products.filter((product) => product.category === category)
   renderCards(categoryProducts)
   loadMoreBtn.style.display = 'none'
+})
+// MODAL
+catalogGrid.addEventListener('click', (e) => {
+  const clickedCard = e.target.closest('.catalog__item')
+  if (!clickedCard) return
+
+  const productName = clickedCard.dataset.name
+  const selectedProduct = products.find((product) => product.name === productName)
+  console.log(selectedProduct)
 })
