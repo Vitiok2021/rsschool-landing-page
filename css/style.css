@@ -196,6 +196,7 @@
 }
 
 .modal {
+  padding: 1.1875rem;
   position: fixed;
   z-index: 999;
   top: 0;
@@ -231,6 +232,11 @@
 }
 .modal__image img {
   max-width: 100%;
+}
+@media (width <= 680px) {
+  .modal__image {
+    flex: 1 0 200px;
+  }
 }
 @media (width <= 600px) {
   .modal__image {
@@ -314,6 +320,14 @@
   .actions-modal__btn:hover .actions-modal__additive {
     background-color: var(--background-page);
   }
+}
+.actions-modal__btn--active {
+  background-color: var(--background-container);
+  color: var(--text-inverse);
+}
+.actions-modal__btn--active .actions-modal__size,
+.actions-modal__btn--active .actions-modal__additive {
+  background-color: var(--background-page);
 }
 .actions-modal__size, .actions-modal__additive {
   text-transform: uppercase;

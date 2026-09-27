@@ -175,6 +175,9 @@ const sizeLabels = document.querySelectorAll('.actions-modal__size-text')
 const additiveLabels = document.querySelectorAll('.actions-modal__additive-text')
 const modalClose = document.querySelector('.modal__btn')
 
+const sizeBtns = document.querySelectorAll('.actions-modal__btn--size')
+const additiveBtns = document.querySelectorAll('.actions-modal__btn--additive')
+
 if (loadMoreBtn) {
   loadMoreBtn.addEventListener('click', (e) => {
     const activeTab = document.querySelector('.tab-catalog__btn--active')
@@ -205,6 +208,15 @@ if (catalogGrid) {
     additiveLabels[1].textContent = selectedProduct.additives[1].name
     additiveLabels[2].textContent = selectedProduct.additives[2].name
 
+    sizeBtns.forEach((btn) => {
+      btn.classList.remove('actions-modal__btn--active')
+    })
+    sizeBtns[0].classList.add('actions-modal__btn--active')
+
+    additiveBtns.forEach((btn) => {
+      btn.classList.remove('actions-modal__btn--active')
+    })
+
     modal.classList.add('is-open')
     body.classList.add('body-lock')
     console.log(selectedProduct)
@@ -227,3 +239,17 @@ if (modalClose) {
     if (e.code === 'Escape' && modal.classList.contains('is-open')) closeModal()
   })
 }
+
+sizeBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    sizeBtns.forEach((item) => {
+      item.classList.remove('actions-modal__btn--active')
+    })
+    btn.classList.add('actions-modal__btn--active')
+  })
+})
+additiveBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('actions-modal__btn--active')
+  })
+})
