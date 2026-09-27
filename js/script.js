@@ -75,11 +75,12 @@ if (sliderTrack) {
   let endX = 0
   sliderTrack.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX
-    console.log(startX)
+    endX = startX
+    // console.log(startX)
   })
   sliderTrack.addEventListener('touchmove', (e) => {
     endX = e.touches[0].clientX
-    console.log(endX)
+    // console.log(endX)
   })
   sliderTrack.addEventListener('touchend', (e) => {
     const diff = startX - endX
@@ -144,7 +145,9 @@ tabs.forEach((tab) => {
 })
 
 function renderCards(products) {
-  catalogGrid.innerHTML = ''
+  if (catalogGrid) {
+    catalogGrid.innerHTML = ''
+  }
   products.forEach((product) => {
     const cardHTML = `<article class="catalog__item item-catalog" data-category="${product.category}" data-name="${product.name}">
                         <div class="item-catalog__image">
@@ -156,7 +159,9 @@ function renderCards(products) {
                           <div class="item-catalog__price">$${product.price}</div>
                         </div>
                       </article>`
-    catalogGrid.insertAdjacentHTML('beforeend', cardHTML)
+    if (catalogGrid) {
+      catalogGrid.insertAdjacentHTML('beforeend', cardHTML)
+    }
   })
 }
 
@@ -170,49 +175,55 @@ const sizeLabels = document.querySelectorAll('.actions-modal__size-text')
 const additiveLabels = document.querySelectorAll('.actions-modal__additive-text')
 const modalClose = document.querySelector('.modal__btn')
 
-loadMoreBtn.addEventListener('click', (e) => {
-  const activeTab = document.querySelector('.tab-catalog__btn--active')
-  const category = activeTab.dataset.category
-  const categoryProducts = products.filter((product) => product.category === category)
-  renderCards(categoryProducts)
-  loadMoreBtn.style.display = 'none'
-})
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener('click', (e) => {
+    const activeTab = document.querySelector('.tab-catalog__btn--active')
+    const category = activeTab.dataset.category
+    const categoryProducts = products.filter((product) => product.category === category)
+    renderCards(categoryProducts)
+    loadMoreBtn.style.display = 'none'
+  })
+}
 // MODAL
-catalogGrid.addEventListener('click', (e) => {
-  const clickedCard = e.target.closest('.catalog__item')
-  if (!clickedCard) return
+if (catalogGrid) {
+  catalogGrid.addEventListener('click', (e) => {
+    const clickedCard = e.target.closest('.catalog__item')
+    if (!clickedCard) return
 
-  const productName = clickedCard.dataset.name
-  const selectedProduct = products.find((product) => product.name === productName)
+    const productName = clickedCard.dataset.name
+    const selectedProduct = products.find((product) => product.name === productName)
 
-  modalImage.src = selectedProduct.image
-  modalTitle.textContent = selectedProduct.name
-  modalDescription.textContent = selectedProduct.description
-  modalPrice.innerHTML = 'Total: <span>$' + selectedProduct.price + '</span>'
-  sizeLabels[0].textContent = selectedProduct.sizes.s.size
-  sizeLabels[1].textContent = selectedProduct.sizes.m.size
-  sizeLabels[2].textContent = selectedProduct.sizes.l.size
+    modalImage.src = selectedProduct.image
+    modalTitle.textContent = selectedProduct.name
+    modalDescription.textContent = selectedProduct.description
+    modalPrice.innerHTML = 'Total: <span>$' + selectedProduct.price + '</span>'
+    sizeLabels[0].textContent = selectedProduct.sizes.s.size
+    sizeLabels[1].textContent = selectedProduct.sizes.m.size
+    sizeLabels[2].textContent = selectedProduct.sizes.l.size
 
-  additiveLabels[0].textContent = selectedProduct.additives[0].name
-  additiveLabels[1].textContent = selectedProduct.additives[1].name
-  additiveLabels[2].textContent = selectedProduct.additives[2].name
+    additiveLabels[0].textContent = selectedProduct.additives[0].name
+    additiveLabels[1].textContent = selectedProduct.additives[1].name
+    additiveLabels[2].textContent = selectedProduct.additives[2].name
 
-  modal.classList.add('is-open')
-  body.classList.add('body-lock')
-  console.log(selectedProduct)
-})
+    modal.classList.add('is-open')
+    body.classList.add('body-lock')
+    console.log(selectedProduct)
+  })
+}
 
 function closeModal() {
   modal.classList.remove('is-open')
   body.classList.remove('body-lock')
 }
 
-modalClose.addEventListener('click', closeModal)
-modal.addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) closeModal()
-  // console.log(e.target)
-  // console.log(e.currentTarget)
-})
-document.addEventListener('keydown', (e) => {
-  if (e.code === 'Escape' && modal.classList.contains('is-open')) closeModal()
-})
+if (modalClose) {
+  modalClose.addEventListener('click', closeModal)
+  modal.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal()
+    // console.log(e.target)
+    // console.log(e.currentTarget)
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape' && modal.classList.contains('is-open')) closeModal()
+  })
+}
