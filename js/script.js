@@ -174,6 +174,7 @@ const modalPrice = document.querySelector('.modal__price')
 const sizeLabels = document.querySelectorAll('.actions-modal__size-text')
 const additiveLabels = document.querySelectorAll('.actions-modal__additive-text')
 const modalClose = document.querySelector('.modal__btn')
+let selectedProduct = {}
 
 const sizeBtns = document.querySelectorAll('.actions-modal__btn--size')
 const additiveBtns = document.querySelectorAll('.actions-modal__btn--additive')
@@ -194,12 +195,11 @@ if (catalogGrid) {
     if (!clickedCard) return
 
     const productName = clickedCard.dataset.name
-    const selectedProduct = products.find((product) => product.name === productName)
+    selectedProduct = products.find((product) => product.name === productName)
 
     modalImage.src = selectedProduct.image
     modalTitle.textContent = selectedProduct.name
     modalDescription.textContent = selectedProduct.description
-    modalPrice.innerHTML = 'Total: <span>$' + selectedProduct.price + '</span>'
     sizeLabels[0].textContent = selectedProduct.sizes.s.size
     sizeLabels[1].textContent = selectedProduct.sizes.m.size
     sizeLabels[2].textContent = selectedProduct.sizes.l.size
@@ -217,6 +217,7 @@ if (catalogGrid) {
       btn.classList.remove('actions-modal__btn--active')
     })
 
+    updateModalPrice()
     modal.classList.add('is-open')
     body.classList.add('body-lock')
     console.log(selectedProduct)
@@ -246,10 +247,36 @@ sizeBtns.forEach((btn) => {
       item.classList.remove('actions-modal__btn--active')
     })
     btn.classList.add('actions-modal__btn--active')
+    updateModalPrice()
   })
 })
 additiveBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
     btn.classList.toggle('actions-modal__btn--active')
+    updateModalPrice()
   })
 })
+
+function updateModalPrice() {
+  let totalPrice = Number(selectedProduct.price)
+  if (sizeBtns[0].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.sizes.s['add-price'])
+  }
+  if (sizeBtns[1].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.sizes.m['add-price'])
+  }
+  if (sizeBtns[2].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.sizes.l['add-price'])
+  }
+  if (additiveBtns[0].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.additives[0]['add-price'])
+  }
+  if (additiveBtns[1].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.additives[1]['add-price'])
+  }
+  if (additiveBtns[2].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.additives[2]['add-price'])
+  }
+  totalPrice = totalPrice.toFixed(2)
+  modalPrice.innerHTML = 'Total: <span>$' + totalPrice + '</span>'
+}
