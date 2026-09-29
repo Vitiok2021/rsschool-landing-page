@@ -280,3 +280,32 @@ function updateModalPrice() {
   totalPrice = totalPrice.toFixed(2)
   modalPrice.innerHTML = 'Total: <span>$' + totalPrice + '</span>'
 }
+
+let isDesktop = window.innerWidth > 768
+window.addEventListener('resize', () => {
+  const currentIsDesktop = window.innerWidth > 768
+  if (isDesktop !== currentIsDesktop) {
+    isDesktop = currentIsDesktop
+    const activeTab = document.querySelector('.tab-catalog__btn--active')
+    if (!activeTab || products.length === 0) return
+
+    const category = activeTab.dataset.category
+    const categoryProducts = products.filter((product) => product.category === category)
+
+    if (window.innerWidth > 768) {
+      renderCards(categoryProducts)
+
+      if (loadMoreBtn) {
+        loadMoreBtn.style.display = 'none'
+      }
+    } else {
+      const currentRenderedCards = document.querySelectorAll('.catalog__item').length
+
+      renderCards(categoryProducts.slice(0, limitTabs))
+
+      if (categoryProducts.length > limitTabs && loadMoreBtn) {
+        loadMoreBtn.style.display = 'block'
+      }
+    }
+  }
+})
