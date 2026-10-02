@@ -14,3 +14,298 @@ function toggleTheme() {
     localStorage.setItem('theme', 'light')
   }
 }
+
+// Burger
+const burgerBtn = document.querySelector('.icon-menu')
+const body = document.querySelector('body')
+const burgerBody = document.querySelector('.menu-header')
+burgerBtn.addEventListener('click', () => {
+  body.classList.toggle('menu-open')
+  body.classList.toggle('body-lock')
+})
+
+const menuLinks = document.querySelectorAll('.menu-header__link, .actions-header__menu')
+menuLinks.forEach((link) => {
+  link.addEventListener('click', () => {
+    body.classList.remove('menu-open')
+    body.classList.remove('body-lock')
+  })
+})
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    body.classList.remove('menu-open')
+    body.classList.remove('body-lock')
+  }
+})
+
+// Slider
+const prevBtn = document.querySelector('.slider__btn-prev')
+const nextBtn = document.querySelector('.slider__btn-next')
+const sliderTrack = document.querySelector('.slider__track')
+const sliderItem = document.querySelectorAll('.slider__item')
+const sliderDot = document.querySelectorAll('.slider__dot')
+let currentIndex = 0
+function updateSlider() {
+  sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`
+  sliderDot.forEach((dot) => {
+    dot.classList.remove('slider__dot--active')
+  })
+  sliderDot[currentIndex].classList.add('slider__dot--active')
+}
+if (prevBtn) {
+  prevBtn.addEventListener('click', () => {
+    currentIndex--
+    if (currentIndex < 0) {
+      currentIndex = sliderItem.length - 1
+    }
+    updateSlider()
+  })
+}
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
+    currentIndex++
+    if (currentIndex === sliderItem.length) {
+      currentIndex = 0
+    }
+    updateSlider()
+  })
+}
+if (sliderTrack) {
+  let startX = 0
+  let endX = 0
+  sliderTrack.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX
+    endX = startX
+    // console.log(startX)
+  })
+  sliderTrack.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX
+    // console.log(endX)
+  })
+  sliderTrack.addEventListener('touchend', (e) => {
+    const diff = startX - endX
+    if (diff > 50) {
+      currentIndex++
+      if (currentIndex === sliderItem.length) {
+        currentIndex = 0
+      }
+      updateSlider()
+    }
+    if (diff < -50) {
+      currentIndex--
+      if (currentIndex < 0) {
+        currentIndex = sliderItem.length - 1
+      }
+      updateSlider()
+    }
+  })
+}
+
+// CATALOG
+let products = []
+async function getProducts() {
+  const response = await fetch('data/products.json')
+  products = await response.json()
+  // console.log(products)
+  let currentProducts = products.filter((product) => product.category === 'coffee')
+  if (window.innerWidth <= 768) {
+    currentProducts = currentProducts.slice(0, limitTabs)
+  }
+  renderCards(currentProducts)
+}
+
+getProducts()
+
+const catalogGrid = document.querySelector('.catalog__grid')
+const tabs = document.querySelectorAll('.tab-catalog__btn')
+const limitTabs = 4
+const loadMoreBtn = document.querySelector('.catalog__load-more-btn')
+
+tabs.forEach((tab) => {
+  tab.addEventListener('click', (e) => {
+    const category = e.currentTarget.dataset.category
+    const categoryProducts = products.filter((product) => product.category === category)
+    let productsToRender = categoryProducts
+    if (window.innerWidth <= 768) {
+      productsToRender = categoryProducts.slice(0, limitTabs)
+    }
+    renderCards(productsToRender)
+
+    if (categoryProducts.length > productsToRender.length) {
+      loadMoreBtn.style.display = 'block'
+    } else {
+      loadMoreBtn.style.display = 'none'
+    }
+
+    tabs.forEach((tab) => {
+      tab.classList.remove('tab-catalog__btn--active')
+    })
+    e.currentTarget.classList.add('tab-catalog__btn--active')
+  })
+})
+
+function renderCards(products) {
+  if (catalogGrid) {
+    catalogGrid.innerHTML = ''
+  }
+  products.forEach((product) => {
+    const cardHTML = `<article class="catalog__item item-catalog" data-category="${product.category}" data-name="${product.name}">
+                        <div class="item-catalog__image">
+                          <img src="${product.image}" />
+                        </div>
+                        <div class="item-catalog__body">
+                          <h3 class="item-catalog__title">${product.name}</h3>
+                          <div class="item-catalog__text">${product.description}</div>
+                          <div class="item-catalog__price">$${product.price}</div>
+                        </div>
+                      </article>`
+    if (catalogGrid) {
+      catalogGrid.insertAdjacentHTML('beforeend', cardHTML)
+    }
+  })
+}
+
+// LOAD MORE
+const modal = document.querySelector('.modal')
+const modalImage = document.querySelector('.modal__image img')
+const modalTitle = document.querySelector('.modal__title')
+const modalDescription = document.querySelector('.modal__description')
+const modalPrice = document.querySelector('.modal__price')
+const sizeLabels = document.querySelectorAll('.actions-modal__size-text')
+const additiveLabels = document.querySelectorAll('.actions-modal__additive-text')
+const modalClose = document.querySelector('.modal__btn')
+let selectedProduct = {}
+
+const sizeBtns = document.querySelectorAll('.actions-modal__btn--size')
+const additiveBtns = document.querySelectorAll('.actions-modal__btn--additive')
+
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener('click', (e) => {
+    const activeTab = document.querySelector('.tab-catalog__btn--active')
+    const category = activeTab.dataset.category
+    const categoryProducts = products.filter((product) => product.category === category)
+    renderCards(categoryProducts)
+    loadMoreBtn.style.display = 'none'
+  })
+}
+// MODAL
+if (catalogGrid) {
+  catalogGrid.addEventListener('click', (e) => {
+    const clickedCard = e.target.closest('.catalog__item')
+    if (!clickedCard) return
+
+    const productName = clickedCard.dataset.name
+    selectedProduct = products.find((product) => product.name === productName)
+
+    modalImage.src = selectedProduct.image
+    modalTitle.textContent = selectedProduct.name
+    modalDescription.textContent = selectedProduct.description
+    sizeLabels[0].textContent = selectedProduct.sizes.s.size
+    sizeLabels[1].textContent = selectedProduct.sizes.m.size
+    sizeLabels[2].textContent = selectedProduct.sizes.l.size
+
+    additiveLabels[0].textContent = selectedProduct.additives[0].name
+    additiveLabels[1].textContent = selectedProduct.additives[1].name
+    additiveLabels[2].textContent = selectedProduct.additives[2].name
+
+    sizeBtns.forEach((btn) => {
+      btn.classList.remove('actions-modal__btn--active')
+    })
+    sizeBtns[0].classList.add('actions-modal__btn--active')
+
+    additiveBtns.forEach((btn) => {
+      btn.classList.remove('actions-modal__btn--active')
+    })
+
+    updateModalPrice()
+    modal.classList.add('is-open')
+    body.classList.add('body-lock')
+    console.log(selectedProduct)
+  })
+}
+
+function closeModal() {
+  modal.classList.remove('is-open')
+  body.classList.remove('body-lock')
+}
+
+if (modalClose) {
+  modalClose.addEventListener('click', closeModal)
+  modal.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal()
+    // console.log(e.target)
+    // console.log(e.currentTarget)
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape' && modal.classList.contains('is-open')) closeModal()
+  })
+}
+
+sizeBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    sizeBtns.forEach((item) => {
+      item.classList.remove('actions-modal__btn--active')
+    })
+    btn.classList.add('actions-modal__btn--active')
+    updateModalPrice()
+  })
+})
+additiveBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('actions-modal__btn--active')
+    updateModalPrice()
+  })
+})
+
+function updateModalPrice() {
+  let totalPrice = Number(selectedProduct.price)
+  if (sizeBtns[0].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.sizes.s['add-price'])
+  }
+  if (sizeBtns[1].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.sizes.m['add-price'])
+  }
+  if (sizeBtns[2].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.sizes.l['add-price'])
+  }
+  if (additiveBtns[0].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.additives[0]['add-price'])
+  }
+  if (additiveBtns[1].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.additives[1]['add-price'])
+  }
+  if (additiveBtns[2].classList.contains('actions-modal__btn--active')) {
+    totalPrice = totalPrice + Number(selectedProduct.additives[2]['add-price'])
+  }
+  totalPrice = totalPrice.toFixed(2)
+  modalPrice.innerHTML = 'Total: <span>$' + totalPrice + '</span>'
+}
+
+let isDesktop = window.innerWidth > 768
+window.addEventListener('resize', () => {
+  const currentIsDesktop = window.innerWidth > 768
+  if (isDesktop !== currentIsDesktop) {
+    isDesktop = currentIsDesktop
+    const activeTab = document.querySelector('.tab-catalog__btn--active')
+    if (!activeTab || products.length === 0) return
+
+    const category = activeTab.dataset.category
+    const categoryProducts = products.filter((product) => product.category === category)
+
+    if (window.innerWidth > 768) {
+      renderCards(categoryProducts)
+
+      if (loadMoreBtn) {
+        loadMoreBtn.style.display = 'none'
+      }
+    } else {
+      const currentRenderedCards = document.querySelectorAll('.catalog__item').length
+
+      renderCards(categoryProducts.slice(0, limitTabs))
+
+      if (categoryProducts.length > limitTabs && loadMoreBtn) {
+        loadMoreBtn.style.display = 'block'
+      }
+    }
+  }
+})
